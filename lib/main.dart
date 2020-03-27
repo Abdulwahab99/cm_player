@@ -1,22 +1,36 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_music_neumorphism/Services/navigationServices.dart';
 import 'package:flutter_music_neumorphism/Services/router.dart';
 import 'package:flutter_music_neumorphism/Services/routes.dart';
+import 'package:flutter_music_neumorphism/simple_bloc_delegate.dart';
 
-void main() => runApp(MyApp());
+import 'blocs/player_bloc.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  BlocSupervisor.delegate = SimpleBlocDelegate();
+
+  runApp(BlocProvider(
+    create: (context) => PlayerBloc()..add(AppStarted()),
+    child: MyApp(),
+  ));
+}
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(
-          //this is what you want
-          accentColor: Colors.grey[800],
-        ),
-        onGenerateRoute: generateRoute,
-        navigatorKey: navigatorKey,
-        initialRoute: Routes.SongList);
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        //this is what you want
+        fontFamily: 'Ubuntu',
+        accentColor: Colors.grey[800],
+      ),
+      onGenerateRoute: generateRoute,
+      navigatorKey: navigatorKey,
+      initialRoute: Routes.Home,
+    );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_music_neumorphism/Services/routes.dart';
 import 'package:flutter_music_neumorphism/Views/SongDetail.dart';
 import 'package:flutter_music_neumorphism/Views/SongList.dart';
+import 'package:flutter_music_neumorphism/Views/home.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   final Map args = settings.arguments;
@@ -14,6 +15,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
               ));
     case Routes.SongList:
       return MaterialPageRoute(builder: (context) => SongList());
+
+    case Routes.Home:
+      return MaterialPageRoute(builder: (context) => HomePage());
+
     default:
       return MaterialPageRoute(
         builder: (context) => Scaffold(
